@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.3625f807144f53acf.min.css?v=fbfc4466" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.02cb18745d09eea51.min.css?v=ff456132" />
         <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
     <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -322,6 +322,21 @@
   
   
     <li class="md-nav__item">
+      <a href="parameter_types.html" class="md-nav__link">
+        <span title="/parameter_types.ipynb (reference label)" class="md-ellipsis">Parameter Types</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="domain_reduction.html" class="md-nav__link">
         <span title="/domain_reduction.ipynb (reference label)" class="md-ellipsis">Sequential Domain Reduction</span>
       </a>
@@ -501,6 +516,21 @@
   
   
     <li class="md-nav__item">
+      <a href="reference/parameter.html" class="md-nav__link">
+        <span title="/reference/parameter.rst (reference label)" class="md-ellipsis">bayes_<wbr>opt.<wbr>parameter</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="reference/exception.html" class="md-nav__link">
         <span title="/reference/exception.rst (reference label)" class="md-ellipsis">bayes_<wbr>opt.<wbr>exception</span>
       </a>
@@ -572,12 +602,12 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="kn">import</span> <span class="n">BayesianOptimization</span>
-<span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="kn">import</span> <span class="n">acquisition</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">bayes_opt</span><span class="w"> </span><span class="kn">import</span> <span class="n">BayesianOptimization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bayes_opt</span><span class="w"> </span><span class="kn">import</span> <span class="n">acquisition</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">gridspec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">gridspec</span>
 </code></pre></div>
 </div>
 </div>
@@ -585,17 +615,17 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">target</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">target</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">posterior</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
     <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">_gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span>
 
-<span class="k">def</span> <span class="nf">plot_gp</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_gp</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">acquisition_function_</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">acquisition_function</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
     <span class="n">steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">optimizer</span><span class="o">.</span><span class="n">space</span><span class="p">)</span>
@@ -649,11 +679,11 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">GreedyAcquisition</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GreedyAcquisition</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">mean</span> <span class="c1"># disregard std</span>
 </code></pre></div>
 </div>
@@ -698,25 +728,29 @@
 </div>
 </div>
 <p>As we can see, the greedy policy is <em>too</em> greedy and does not explore enough to find the maximum.</p>
-<p>What if our acquisition function does not depend solely on <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">std</span></code>? In that case, we can intervene at a deeper level, and overwrite the <code class="docutils literal notranslate"><span class="pre">._get_acq</span></code> function. The built-in version of <code class="docutils literal notranslate"><span class="pre">._get_acq</span></code> is a higher-order function which returns a function accepting an array-like <code class="docutils literal notranslate"><span class="pre">x</span></code> and performing the following: 1. Evaluate the GP mean <span class="math notranslate nohighlight">\(\mu\)</span> and std <span class="math notranslate nohighlight">\(\sigma\)</span> at points <code class="docutils literal notranslate"><span class="pre">x</span></code>. 2. If applicapable, evaluate the constraint fulfilment probability <span class="math notranslate nohighlight">\(p_c\)</span> at x. 3. Return
-<code class="docutils literal notranslate"><span class="pre">-1</span> <span class="pre">*</span> <span class="pre">base_acq(mean,</span> <span class="pre">std)</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span> <span class="pre">*</span> <span class="pre">base_acq(mean,</span> <span class="pre">std)</span> <span class="pre">*</span> <span class="pre">p_c</span></code></p>
+<p>What if our acquisition function does not depend solely on <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">std</span></code>? In that case, we can intervene at a deeper level, and overwrite the <code class="docutils literal notranslate"><span class="pre">._get_acq</span></code> function. The built-in version of <code class="docutils literal notranslate"><span class="pre">._get_acq</span></code> is a higher-order function which returns a function accepting an array-like <code class="docutils literal notranslate"><span class="pre">x</span></code> and performing the following:</p>
+<ol class="arabic simple">
+<li><p>Evaluate the GP mean <span class="math notranslate nohighlight">\(\mu\)</span> and std <span class="math notranslate nohighlight">\(\sigma\)</span> at points <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p>If applicapable, evaluate the constraint fulfilment probability <span class="math notranslate nohighlight">\(p_c\)</span> at x.</p></li>
+<li><p>Return <code class="docutils literal notranslate"><span class="pre">-1</span> <span class="pre">*</span> <span class="pre">base_acq(mean,</span> <span class="pre">std)</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span> <span class="pre">*</span> <span class="pre">base_acq(mean,</span> <span class="pre">std)</span> <span class="pre">*</span> <span class="pre">p_c</span></code></p></li>
+</ol>
 <p>An example of such an acquisition function is Thompson Sampling. If you consider a Gaussian Process as a prior over functions, Thompson Sampling works by sampling a function from this prior and then selecting the argmax as next point of interest. This is a somewhat noisy version of the greedy acquisition, which will encourage some exploration.</p>
 <p>While we usually find the argmax of the acquisition function through a combination of random sampling and gradient-based optimization, we will skip the gradient-based optimization here, as it is quite expensive and would require us to fix the multivariate normal. We can do this by additionally overwriting <code class="docutils literal notranslate"><span class="pre">.suggest</span></code>, specifically by changing the default argument of <code class="docutils literal notranslate"><span class="pre">n_l_bfgs_b</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-<span class="k">class</span> <span class="nc">ThompsonSampling</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ThompsonSampling</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_cov</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_cov</span><span class="p">):</span>
         <span class="k">assert</span> <span class="n">y_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;y_cov must be a square matrix.&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">y_mean</span><span class="p">,</span> <span class="n">y_cov</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_get_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">constraint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Received constraints, but acquisition function </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
@@ -726,7 +760,7 @@
 
         <span class="c1"># overwrite the base method since we require cov not std</span>
         <span class="n">dim</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">X_train_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">def</span> <span class="nf">acq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">acq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
             <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -734,7 +768,7 @@
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_acq</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">acq</span>
 
-    <span class="k">def</span> <span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="c1"># reduce n_random and n_l_bfgs_b to reduce the computational load</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">)</span>
 </code><br/></pre></div>
@@ -798,22 +832,22 @@ unit cost). Here we divide the EI by a specific cost function.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ExpectedImprovementPerUnitCost</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">ExpectedImprovement</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExpectedImprovementPerUnitCost</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">ExpectedImprovement</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span>
 
-    <span class="k">def</span> <span class="nf">_get_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">constraint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">super_acq</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_acq</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">constraint</span><span class="p">)</span>
         <span class="n">acq</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">super_acq</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">acq</span>
 
-    <span class="k">def</span> <span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="c1"># let&#39;s get the most recently evaluated point from the target_space</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="o">=</span> <span class="n">target_space</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">)</span>
@@ -948,13 +982,13 @@ unit cost). Here we divide the EI by a specific cost function.</p>
       <div class="md-copyright">
   
     <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2024, Fernando Nogueira and the bayesian-optimization developers.
+        &#169; Copyright 2025, Fernando Nogueira and the bayesian-optimization developers.
         
     </div>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    8.0.2.
+    8.1.3.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
