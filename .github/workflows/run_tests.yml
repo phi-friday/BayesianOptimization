@@ -5,8 +5,8 @@ name: tests
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
+    branches:
+      - apply-pep621-test
 
 permissions:
   contents: read

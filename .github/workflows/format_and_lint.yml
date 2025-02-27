@@ -2,8 +2,8 @@ name: Code format and lint
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
+    branches:
+      - apply-pep621-test
 
 permissions:
   contents: read
